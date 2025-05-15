@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- <xacro:include filename="$(find bam_descriptions)/urdf/common.xacro" /> -->
+
+    <xacro:property name="row_length" value="1"/>
+    <xacro:property name="row_width" value="1.2"/>
+    <xacro:property name="row_height" value="0.6"/>
+    <xacro:property name="row_mounting_spacing" value="0.56"/>
+    <xacro:property name="extrusion_width" value="0.04"/>
+
+
+    <xacro:macro name="extrusion_material">
+        <material name="StoglRobotics/DarkGrey"/>
+    </xacro:macro>
+
+    <link name="base_link"/> 
+
+    <joint name="base_link_to_row_extrusions" type="fixed">
+        <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="row_extrusions"/>
+    </joint>
+
+    <link name="row_extrusions">
+
+        <!-- Mounting Bars for Racks -->
+        <visual>
+            <origin xyz="${row_mounting_spacing/2} 0.0 ${-extrusion_width/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${extrusion_width} ${row_length} ${extrusion_width} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+        <visual>
+            <origin xyz="${-row_mounting_spacing/2} 0.0 ${-extrusion_width/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${extrusion_width} ${row_length} ${extrusion_width} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+
+        <!-- Front Bars -->
+        <xacro:macro name="row_ends" params="prefix reflect">
+        <visual name="upper_bar"> 
+            <origin xyz="0 ${reflect*row_length/2} ${-extrusion_width/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${row_width} ${extrusion_width} ${extrusion_width} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+        <visual name="upper_bar">
+            <origin xyz="0 ${reflect*row_length/2} ${(-extrusion_width/2) - row_height}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${row_width} ${extrusion_width} ${extrusion_width} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+        <visual name="right_bar">
+            <origin xyz="${row_width/2} ${reflect*row_length/2} ${(-extrusion_width/2) - (row_height/2)}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${extrusion_width} ${extrusion_width} ${row_height} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+        <visual name="left_bar">
+            <origin xyz="${-row_width/2} ${reflect*row_length/2} ${(-extrusion_width/2) - (row_height/2)}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${extrusion_width} ${extrusion_width} ${row_height} "/>
+            </geometry>
+            <xacro:extrusion_material/>
+        </visual>
+        </xacro:macro>
+
+        <!-- Side Bars -->
+        <xacro:macro name="row_sides" params="prefix reflect">
+            <visual name="top_bar">
+                <origin xyz="${reflect*row_width/2} 0.0 ${(-extrusion_width/2)}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="${extrusion_width} ${row_length} ${extrusion_width} "/>
+                </geometry>
+                <xacro:extrusion_material/>
+            </visual>
+            <visual name="bottom_bar">
+                <origin xyz="${reflect*row_width/2} 0.0 ${(-extrusion_width/2) - row_height}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="${extrusion_width} ${row_length} ${extrusion_width} "/>
+                </geometry>
+                <xacro:extrusion_material/>
+            </visual>
+
+        </xacro:macro>
+
+        <xacro:row_ends prefix="front" reflect="1"/>
+        <xacro:row_ends prefix="back" reflect="-1"/>
+
+        <xacro:row_sides prefix="right" reflect="1"/>
+        <xacro:row_sides prefix="left" reflect="-1"/>
+
+    </link>
+        
+
+    <xacro:macro name="rack" params="num">
+
+        <xacro:property name="length" value="0.6"/>
+        <xacro:property name="width" value="0.02"/>
+        <xacro:property name="spacing" value="0.1"/>
+
+        <joint name="row_extrusions_to_rack_extrusions" type="fixed">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <parent link="row_extrusions"/>
+            <child link="rack_${num}_extrusions"/>
+        </joint>
+
+        <link name="rack_${num}_extrusions">
+            <visual>
+                <origin xyz="0.0 ${spacing/2} ${width/2}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="${length} ${width} ${width} "/>
+                </geometry>
+            </visual>
+            <visual>
+                <origin xyz="0.0 ${-spacing/2} ${width/2}" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="${length} ${width} ${width} "/>
+                </geometry>
+            </visual>
+        </link>
+
+    </xacro:macro>
+
+    <!-- <xacro:rack num="1"/> -->
+
+</robot>

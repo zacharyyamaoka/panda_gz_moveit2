@@ -24,7 +24,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="${mesh_offset_rpy}"/>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/${mesh}.dae"/>
+          <mesh filename="package://panda_description/panda/meshes/visual/${mesh}.dae"/>
         </geometry>
       </visual>
 
@@ -32,7 +32,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="${mesh_offset_rpy}"/>
           <geometry>
-            <mesh filename="package://panda_description/meshes/collision/${mesh}.stl"/>
+            <mesh filename="package://panda_description/panda/meshes/collision/${mesh}.stl"/>
           </geometry>
         </collision>
       </xacro:if>

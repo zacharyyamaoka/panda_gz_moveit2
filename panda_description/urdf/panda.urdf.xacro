@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- URDF for Franka Emika Panda -->
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="panda">
 
   <!--                   -->
   <!-- Imported elements -->
@@ -75,9 +75,20 @@
     gazebo_preserve_fixed_joint="$(arg gazebo_preserve_fixed_joint)"
   />
 
+  <joint name="${world_name}_to_base_link" type="fixed">
+      <!-- <origin xyz="${world_xyz}" rpy="${world_rpy}"/> -->
+      <parent link="${world_name}"/>
+      <child link="base_link"/>
+  </joint>
+  
+  <xacro:panda_dummy_link
+    link_name="base_link"
+    gazebo_preserve_fixed_joint="$(arg gazebo_preserve_fixed_joint)"
+  />
+
   <!-- Arm -->
   <xacro:panda_arm
-    base_parent="world"
+    base_parent="base_link"
     prefix="${prefix_arm}"
     origin_xyz="${origin_xyz}"
     origin_rpy="${origin_rpy}"
