@@ -7,8 +7,15 @@
 <robot name="panda">
   <link name="world">
   </link>
-  <joint name="panda_joint_base" type="fixed">
+  <joint name="world_to_base_link" type="fixed">
+    <!-- <origin xyz="${world_xyz}" rpy="${world_rpy}"/> -->
     <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  <link name="base_link">
+  </link>
+  <joint name="panda_joint_base" type="fixed">
+    <parent link="base_link"/>
     <child link="panda_link0"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
@@ -16,13 +23,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link0.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link0.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link0.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link0.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -60,13 +67,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link1.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link1.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link1.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link1.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -104,13 +111,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link2.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link2.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link2.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link2.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -148,13 +155,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link3.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link3.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link3.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link3.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -192,13 +199,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link4.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link4.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link4.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link4.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -236,13 +243,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link5.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link5.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link5.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link5.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -280,13 +287,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link6.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link6.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link6.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link6.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -324,13 +331,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/link7.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/link7.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/link7.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/link7.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -413,13 +420,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/hand.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/hand.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/hand.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/hand.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -457,13 +464,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/finger.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/finger.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/finger.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/finger.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -501,13 +508,13 @@
     <visual>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/visual/finger.dae"/>
+        <mesh filename="package://panda_description/panda/meshes/visual/finger.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://panda_description/meshes/collision/finger.stl"/>
+        <mesh filename="package://panda_description/panda/meshes/collision/finger.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -547,8 +554,11 @@
     </joint>
   </ros2_control>
   <gazebo>
-    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>/home/bam/public_ws/install/panda_moveit_config/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
+      <ros>
+        <namespace>bam_GPU</namespace>
+      </ros>
     </plugin>
   </gazebo>
 </robot>

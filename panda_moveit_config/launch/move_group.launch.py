@@ -19,6 +19,7 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
+# ros2 launch panda_moveit_config move_group.launch.py enable_rviz:=true
 
 def generate_launch_description():
     # Declare all launch arguments
@@ -129,6 +130,7 @@ def generate_launch_description():
         moveit_config_package, path.join("config", "kinematics.yaml")
     )
 
+    print("KINEMATICS YAML: ", kinematics)
     # Joint limits
     joint_limits = {
         "robot_description_planning": load_yaml(
@@ -382,7 +384,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # Collision geometry
         DeclareLaunchArgument(
             "collision_arm",
-            default_value="true",
+            default_value="false",
             description="Flag to enable collision geometry for manipulator's arm.",
         ),
         DeclareLaunchArgument(
@@ -436,12 +438,12 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # Servo
         DeclareLaunchArgument(
             "enable_servo",
-            default_value="true",
+            default_value="false",
             description="Flag to enable MoveIt2 Servo for manipulator.",
         ),
         # Miscellaneous
         DeclareLaunchArgument(
-            "enable_rviz", default_value="true", description="Flag to enable RViz2."
+            "enable_rviz", default_value="false", description="Flag to enable RViz2."
         ),
         DeclareLaunchArgument(
             "rviz_config",
@@ -454,7 +456,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "use_sim_time",
-            default_value="false",
+            default_value="true",
             description="If true, use simulated clock.",
         ),
         DeclareLaunchArgument(
